@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1120" viewBox="0 0 720 1120">
+  <rect width="720" height="1120" fill="#f4f6f8"/>
+  <rect x="36" y="36" width="648" height="1048" rx="28" fill="#ffffff" stroke="#dfe4ea" stroke-width="3"/>
+  <circle cx="360" cy="190" r="64" fill="#e8f7ef"/>
+  <path d="M330 190l20 20 42-48" fill="none" stroke="#20a464" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="360" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#20252b">支付成功</text>
+  <text x="360" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" font-weight="700" fill="#111820">¥18.00</text>
+  <line x1="90" y1="455" x2="630" y2="455" stroke="#edf0f2" stroke-width="2"/>
+  <text x="100" y="535" font-family="Arial, sans-serif" font-size="25" fill="#8b949e">收款方</text>
+  <text x="620" y="535" text-anchor="end" font-family="Arial, sans-serif" font-size="25" fill="#30363d">就是打球</text>
+  <text x="100" y="610" font-family="Arial, sans-serif" font-size="25" fill="#8b949e">订单说明</text>
+  <text x="620" y="610" text-anchor="end" font-family="Arial, sans-serif" font-size="25" fill="#30363d">排位比赛费用</text>
+  <text x="100" y="685" font-family="Arial, sans-serif" font-size="25" fill="#8b949e">支付时间</text>
+  <text x="620" y="685" text-anchor="end" font-family="Arial, sans-serif" font-size="25" fill="#30363d">2026-06-18 19:32</text>
+  <text x="100" y="760" font-family="Arial, sans-serif" font-size="25" fill="#8b949e">订单号</text>
+  <text x="620" y="760" text-anchor="end" font-family="Arial, sans-serif" font-size="23" fill="#30363d">JH-DEMO-180018</text>
+  <rect x="100" y="880" width="520" height="84" rx="16" fill="#fff4e8"/>
+  <text x="360" y="932" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#d96713">演示支付凭证 · 仅供后台审核测试</text>
+</svg>

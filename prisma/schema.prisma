@@ -1,0 +1,317 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  PLAYER
+  REFEREE
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BANNED
+  PENDING_REVIEW
+}
+
+enum RefereeApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum MatchMode {
+  CASUAL
+  RANKED
+}
+
+enum MatchType {
+  ONE_V_ONE
+  THREE_V_THREE
+}
+
+enum MatchStatus {
+  DRAFT
+  OPEN
+  FULL
+  PENDING_PAYMENT
+  PENDING_REFEREE
+  SCHEDULED
+  PRE_CHECK
+  LIVE
+  PAUSED
+  FINISHED
+  CONFIRMED
+  INVALID
+  DISPUTED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PENDING
+  MANUAL_REVIEW
+  PAID
+  REFUNDED
+}
+
+enum DisputeStatus {
+  OPEN
+  REVIEWING
+  RESOLVED
+  REJECTED
+}
+
+enum EventType {
+  CREATE
+  JOIN
+  LEAVE
+  UPLOAD_STREAM
+  CHECK_IN
+  PRE_CHECK
+  START
+  SCORE
+  FOUL
+  TIMEOUT
+  UNDO
+  PAUSE
+  RESUME
+  END
+  CONFIRM
+  INVALID
+  DISPUTE
+  PAYMENT
+}
+
+model User {
+  id                   String               @id @default(cuid())
+  phone                String               @unique
+  email                String?              @unique
+  name                 String
+  handle               String               @unique
+  role                 UserRole             @default(PLAYER)
+  status               UserStatus           @default(ACTIVE)
+  isAdmin              Boolean              @default(false) @map("is_admin")
+  isReferee            Boolean              @default(false) @map("is_referee")
+  avatar               String
+  city                 String?
+  district             String?
+  heightCm             Int?
+  position             String?
+  dominantHand         String?
+  playStyle            String?
+  creditScore          Int                  @default(100)
+  adminNote            String?
+  rankTitle            String               @default("青铜 III")
+  favoriteCourt        String?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @default(now()) @updatedAt
+  ratings              PlayerRating[]
+  matchPlayers         MatchPlayer[]
+  createdMatches       Match[]              @relation("MatchCreator")
+  refereeMatches       Match[]              @relation("RefereeMatches")
+  events               RefereeEvent[]
+  disputes             Dispute[]            @relation("DisputeCreator")
+  resolvedDisputes     Dispute[]            @relation("DisputeResolver")
+  payments             Payment[]            @relation("PaymentUser")
+  reviewedPayments     Payment[]            @relation("PaymentReviewer")
+  refereeApplications  RefereeApplication[] @relation("RefereeApplicant")
+  reviewedApplications RefereeApplication[] @relation("RefereeReviewer")
+  adminLogs            AdminLog[]           @relation("AdminLogActor")
+  violations           ViolationRecord[]    @relation("ViolationUser")
+  createdViolations    ViolationRecord[]    @relation("ViolationCreator")
+
+  @@index([role, status])
+  @@index([isAdmin])
+  @@index([isReferee])
+}
+
+model PlayerRating {
+  id            String    @id @default(cuid())
+  userId        String
+  mode          MatchType
+  rating        Int       @default(1000)
+  wins          Int       @default(0)
+  losses        Int       @default(0)
+  streak        Int       @default(0)
+  pointsFor     Int       @default(0)
+  pointsAgainst Int       @default(0)
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mode])
+  @@index([mode, rating])
+}
+
+model Match {
+  id               String         @id @default(cuid())
+  code             String         @unique
+  title            String
+  mode             MatchMode
+  type             MatchType
+  status           MatchStatus    @default(OPEN)
+  court            String
+  city             String?
+  district         String?
+  gym              String?
+  timeSlot         String?
+  skillLevel       String?
+  ratingMin        Int?
+  ratingMax        Int?
+  scheduledAt      DateTime?
+  livestreamUrl    String?
+  teamAScore       Int            @default(0)
+  teamBScore       Int            @default(0)
+  winnerTeam       String?
+  resultConfirmedA Boolean        @default(false)
+  resultConfirmedB Boolean        @default(false)
+  adminNote        String?
+  maxPlayers       Int            @default(2)
+  buyInCents       Int            @default(0)
+  paymentStatus    PaymentStatus  @default(UNPAID)
+  refereeId        String?
+  createdById      String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  referee          User?          @relation("RefereeMatches", fields: [refereeId], references: [id])
+  createdBy        User?          @relation("MatchCreator", fields: [createdById], references: [id])
+  players          MatchPlayer[]
+  events           RefereeEvent[]
+  payments         Payment[]
+  disputes         Dispute[]
+
+  @@index([mode, type, status])
+  @@index([scheduledAt])
+  @@index([city, district, gym])
+  @@index([timeSlot])
+}
+
+model MatchPlayer {
+  id        String   @id @default(cuid())
+  matchId   String
+  userId    String
+  team      String
+  slot      Int
+  checkedIn Boolean  @default(false)
+  paid      Boolean  @default(false)
+  joinedAt  DateTime @default(now())
+  match     Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([matchId, userId])
+  @@index([matchId, team])
+}
+
+model RefereeEvent {
+  id        String    @id @default(cuid())
+  matchId   String
+  actorId   String?
+  type      EventType
+  team      String?
+  points    Int?
+  note      String?
+  payload   Json?
+  createdAt DateTime  @default(now())
+  match     Match     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  actor     User?     @relation(fields: [actorId], references: [id])
+
+  @@index([matchId, createdAt])
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  matchId       String
+  userId        String
+  amount        Int
+  status        PaymentStatus @default(PENDING)
+  screenshotUrl String?
+  adminNote     String?
+  reviewedById  String?
+  reviewedAt    DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now()) @updatedAt
+  match         Match         @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  user          User          @relation("PaymentUser", fields: [userId], references: [id], onDelete: Cascade)
+  reviewedBy    User?         @relation("PaymentReviewer", fields: [reviewedById], references: [id])
+
+  @@index([matchId])
+  @@index([userId, status])
+}
+
+model Dispute {
+  id           String        @id @default(cuid())
+  matchId      String
+  creatorId    String
+  reason       String
+  status       DisputeStatus @default(OPEN)
+  adminNote    String?
+  resolvedById String?
+  resolvedAt   DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now()) @updatedAt
+  match        Match         @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  creator      User          @relation("DisputeCreator", fields: [creatorId], references: [id])
+  resolvedBy   User?         @relation("DisputeResolver", fields: [resolvedById], references: [id])
+
+  @@index([matchId, status])
+}
+
+model RefereeApplication {
+  id                   String                   @id @default(cuid())
+  userId               String                   @map("user_id")
+  realName             String                   @map("real_name")
+  phone                String
+  city                 String
+  basketballExperience String                   @map("basketball_experience")
+  refereeExperience    String                   @map("referee_experience")
+  hasCertificate       Boolean                  @default(false) @map("has_certificate")
+  certificateUrl       String?                  @map("certificate_url")
+  availableTimes       String                   @map("available_times")
+  introduction         String
+  status               RefereeApplicationStatus @default(PENDING)
+  adminNote            String?                  @map("admin_note")
+  reviewedById         String?                  @map("reviewed_by")
+  reviewedAt           DateTime?                @map("reviewed_at")
+  createdAt            DateTime                 @default(now()) @map("created_at")
+  updatedAt            DateTime                 @updatedAt @map("updated_at")
+  user                 User                     @relation("RefereeApplicant", fields: [userId], references: [id], onDelete: Cascade)
+  reviewedBy           User?                    @relation("RefereeReviewer", fields: [reviewedById], references: [id])
+
+  @@index([status, createdAt])
+  @@index([userId])
+  @@map("referee_applications")
+}
+
+model AdminLog {
+  id         String   @id @default(cuid())
+  adminId    String   @map("admin_id")
+  action     String
+  targetType String   @map("target_type")
+  targetId   String   @map("target_id")
+  note       String?
+  createdAt  DateTime @default(now()) @map("created_at")
+  admin      User     @relation("AdminLogActor", fields: [adminId], references: [id])
+
+  @@index([createdAt])
+  @@index([targetType, targetId])
+  @@index([adminId])
+  @@map("admin_logs")
+}
+
+model ViolationRecord {
+  id          String   @id @default(cuid())
+  userId      String
+  reason      String
+  creditDelta Int      @default(0)
+  matchId     String?
+  createdById String?
+  createdAt   DateTime @default(now())
+  user        User     @relation("ViolationUser", fields: [userId], references: [id], onDelete: Cascade)
+  createdBy   User?    @relation("ViolationCreator", fields: [createdById], references: [id])
+
+  @@index([userId, createdAt])
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640">
+  <rect width="960" height="640" fill="#f5f1e8"/>
+  <rect x="38" y="38" width="884" height="564" rx="10" fill="none" stroke="#b58a4d" stroke-width="4"/>
+  <rect x="56" y="56" width="848" height="528" rx="8" fill="none" stroke="#d9bf8e" stroke-width="2"/>
+  <text x="480" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" font-weight="700" fill="#29231c">篮球裁判员证书</text>
+  <text x="480" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#6a5840">BASKETBALL REFEREE CERTIFICATE</text>
+  <text x="170" y="340" font-family="Arial, sans-serif" font-size="28" fill="#3c3329">姓名：示例申请人</text>
+  <text x="170" y="400" font-family="Arial, sans-serif" font-size="28" fill="#3c3329">等级：三级裁判员</text>
+  <text x="170" y="460" font-family="Arial, sans-serif" font-size="28" fill="#3c3329">证书编号：JH-DEMO-2026</text>
+  <circle cx="755" cy="420" r="76" fill="none" stroke="#b54135" stroke-width="8"/>
+  <text x="755" y="412" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#b54135">示例</text>
+  <text x="755" y="442" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#b54135">审核材料</text>
+</svg>
