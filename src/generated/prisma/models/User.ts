@@ -370,6 +370,12 @@ export type UserWhereInput = {
   adminLogs?: Prisma.AdminLogListRelationFilter
   violations?: Prisma.ViolationRecordListRelationFilter
   createdViolations?: Prisma.ViolationRecordListRelationFilter
+  friendRequestsSent?: Prisma.FriendshipListRelationFilter
+  friendRequestsReceived?: Prisma.FriendshipListRelationFilter
+  ledParties?: Prisma.PartyListRelationFilter
+  partyMemberships?: Prisma.PartyMemberListRelationFilter
+  partyInvitesSent?: Prisma.PartyInviteListRelationFilter
+  partyInvitesReceived?: Prisma.PartyInviteListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -409,6 +415,12 @@ export type UserOrderByWithRelationInput = {
   adminLogs?: Prisma.AdminLogOrderByRelationAggregateInput
   violations?: Prisma.ViolationRecordOrderByRelationAggregateInput
   createdViolations?: Prisma.ViolationRecordOrderByRelationAggregateInput
+  friendRequestsSent?: Prisma.FriendshipOrderByRelationAggregateInput
+  friendRequestsReceived?: Prisma.FriendshipOrderByRelationAggregateInput
+  ledParties?: Prisma.PartyOrderByRelationAggregateInput
+  partyMemberships?: Prisma.PartyMemberOrderByRelationAggregateInput
+  partyInvitesSent?: Prisma.PartyInviteOrderByRelationAggregateInput
+  partyInvitesReceived?: Prisma.PartyInviteOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -451,6 +463,12 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   adminLogs?: Prisma.AdminLogListRelationFilter
   violations?: Prisma.ViolationRecordListRelationFilter
   createdViolations?: Prisma.ViolationRecordListRelationFilter
+  friendRequestsSent?: Prisma.FriendshipListRelationFilter
+  friendRequestsReceived?: Prisma.FriendshipListRelationFilter
+  ledParties?: Prisma.PartyListRelationFilter
+  partyMemberships?: Prisma.PartyMemberListRelationFilter
+  partyInvitesSent?: Prisma.PartyInviteListRelationFilter
+  partyInvitesReceived?: Prisma.PartyInviteListRelationFilter
 }, "id" | "phone" | "email" | "handle">
 
 export type UserOrderByWithAggregationInput = {
@@ -548,6 +566,12 @@ export type UserCreateInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -587,6 +611,12 @@ export type UserUncheckedCreateInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUpdateInput = {
@@ -626,6 +656,12 @@ export type UserUpdateInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -665,6 +701,12 @@ export type UserUncheckedUpdateInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1057,6 +1099,90 @@ export type UserUpdateOneRequiredWithoutAdminLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAdminLogsInput, Prisma.UserUpdateWithoutAdminLogsInput>, Prisma.UserUncheckedUpdateWithoutAdminLogsInput>
 }
 
+export type UserCreateNestedOneWithoutFriendRequestsSentInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsSentInput, Prisma.UserUncheckedCreateWithoutFriendRequestsSentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFriendRequestsSentInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutFriendRequestsReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsReceivedInput, Prisma.UserUncheckedCreateWithoutFriendRequestsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFriendRequestsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFriendRequestsSentNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsSentInput, Prisma.UserUncheckedCreateWithoutFriendRequestsSentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFriendRequestsSentInput
+  upsert?: Prisma.UserUpsertWithoutFriendRequestsSentInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFriendRequestsSentInput, Prisma.UserUpdateWithoutFriendRequestsSentInput>, Prisma.UserUncheckedUpdateWithoutFriendRequestsSentInput>
+}
+
+export type UserUpdateOneRequiredWithoutFriendRequestsReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsReceivedInput, Prisma.UserUncheckedCreateWithoutFriendRequestsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFriendRequestsReceivedInput
+  upsert?: Prisma.UserUpsertWithoutFriendRequestsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFriendRequestsReceivedInput, Prisma.UserUpdateWithoutFriendRequestsReceivedInput>, Prisma.UserUncheckedUpdateWithoutFriendRequestsReceivedInput>
+}
+
+export type UserCreateNestedOneWithoutLedPartiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLedPartiesInput, Prisma.UserUncheckedCreateWithoutLedPartiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLedPartiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutLedPartiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLedPartiesInput, Prisma.UserUncheckedCreateWithoutLedPartiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLedPartiesInput
+  upsert?: Prisma.UserUpsertWithoutLedPartiesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLedPartiesInput, Prisma.UserUpdateWithoutLedPartiesInput>, Prisma.UserUncheckedUpdateWithoutLedPartiesInput>
+}
+
+export type UserCreateNestedOneWithoutPartyMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPartyMembershipsInput, Prisma.UserUncheckedCreateWithoutPartyMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPartyMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPartyMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPartyMembershipsInput, Prisma.UserUncheckedCreateWithoutPartyMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPartyMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutPartyMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPartyMembershipsInput, Prisma.UserUpdateWithoutPartyMembershipsInput>, Prisma.UserUncheckedUpdateWithoutPartyMembershipsInput>
+}
+
+export type UserCreateNestedOneWithoutPartyInvitesSentInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesSentInput, Prisma.UserUncheckedCreateWithoutPartyInvitesSentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPartyInvitesSentInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutPartyInvitesReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesReceivedInput, Prisma.UserUncheckedCreateWithoutPartyInvitesReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPartyInvitesReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPartyInvitesSentNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesSentInput, Prisma.UserUncheckedCreateWithoutPartyInvitesSentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPartyInvitesSentInput
+  upsert?: Prisma.UserUpsertWithoutPartyInvitesSentInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPartyInvitesSentInput, Prisma.UserUpdateWithoutPartyInvitesSentInput>, Prisma.UserUncheckedUpdateWithoutPartyInvitesSentInput>
+}
+
+export type UserUpdateOneRequiredWithoutPartyInvitesReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesReceivedInput, Prisma.UserUncheckedCreateWithoutPartyInvitesReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPartyInvitesReceivedInput
+  upsert?: Prisma.UserUpsertWithoutPartyInvitesReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPartyInvitesReceivedInput, Prisma.UserUpdateWithoutPartyInvitesReceivedInput>, Prisma.UserUncheckedUpdateWithoutPartyInvitesReceivedInput>
+}
+
 export type UserCreateNestedOneWithoutViolationsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutViolationsInput, Prisma.UserUncheckedCreateWithoutViolationsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutViolationsInput
@@ -1123,6 +1249,12 @@ export type UserCreateWithoutRatingsInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutRatingsInput = {
@@ -1161,6 +1293,12 @@ export type UserUncheckedCreateWithoutRatingsInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutRatingsInput = {
@@ -1215,6 +1353,12 @@ export type UserUpdateWithoutRatingsInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRatingsInput = {
@@ -1253,6 +1397,12 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateWithoutRefereeMatchesInput = {
@@ -1291,6 +1441,12 @@ export type UserCreateWithoutRefereeMatchesInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutRefereeMatchesInput = {
@@ -1329,6 +1485,12 @@ export type UserUncheckedCreateWithoutRefereeMatchesInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutRefereeMatchesInput = {
@@ -1372,6 +1534,12 @@ export type UserCreateWithoutCreatedMatchesInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutCreatedMatchesInput = {
@@ -1410,6 +1578,12 @@ export type UserUncheckedCreateWithoutCreatedMatchesInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutCreatedMatchesInput = {
@@ -1464,6 +1638,12 @@ export type UserUpdateWithoutRefereeMatchesInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefereeMatchesInput = {
@@ -1502,6 +1682,12 @@ export type UserUncheckedUpdateWithoutRefereeMatchesInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUpsertWithoutCreatedMatchesInput = {
@@ -1551,6 +1737,12 @@ export type UserUpdateWithoutCreatedMatchesInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedMatchesInput = {
@@ -1589,6 +1781,12 @@ export type UserUncheckedUpdateWithoutCreatedMatchesInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateWithoutMatchPlayersInput = {
@@ -1627,6 +1825,12 @@ export type UserCreateWithoutMatchPlayersInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutMatchPlayersInput = {
@@ -1665,6 +1869,12 @@ export type UserUncheckedCreateWithoutMatchPlayersInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutMatchPlayersInput = {
@@ -1719,6 +1929,12 @@ export type UserUpdateWithoutMatchPlayersInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMatchPlayersInput = {
@@ -1757,6 +1973,12 @@ export type UserUncheckedUpdateWithoutMatchPlayersInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateWithoutEventsInput = {
@@ -1795,6 +2017,12 @@ export type UserCreateWithoutEventsInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutEventsInput = {
@@ -1833,6 +2061,12 @@ export type UserUncheckedCreateWithoutEventsInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutEventsInput = {
@@ -1887,6 +2121,12 @@ export type UserUpdateWithoutEventsInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEventsInput = {
@@ -1925,6 +2165,12 @@ export type UserUncheckedUpdateWithoutEventsInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -1963,6 +2209,12 @@ export type UserCreateWithoutPaymentsInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2001,6 +2253,12 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2044,6 +2302,12 @@ export type UserCreateWithoutReviewedPaymentsInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutReviewedPaymentsInput = {
@@ -2082,6 +2346,12 @@ export type UserUncheckedCreateWithoutReviewedPaymentsInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutReviewedPaymentsInput = {
@@ -2136,6 +2406,12 @@ export type UserUpdateWithoutPaymentsInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2174,6 +2450,12 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUpsertWithoutReviewedPaymentsInput = {
@@ -2223,6 +2505,12 @@ export type UserUpdateWithoutReviewedPaymentsInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedPaymentsInput = {
@@ -2261,6 +2549,12 @@ export type UserUncheckedUpdateWithoutReviewedPaymentsInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateWithoutDisputesInput = {
@@ -2299,6 +2593,12 @@ export type UserCreateWithoutDisputesInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutDisputesInput = {
@@ -2337,6 +2637,12 @@ export type UserUncheckedCreateWithoutDisputesInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutDisputesInput = {
@@ -2380,6 +2686,12 @@ export type UserCreateWithoutResolvedDisputesInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutResolvedDisputesInput = {
@@ -2418,6 +2730,12 @@ export type UserUncheckedCreateWithoutResolvedDisputesInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutResolvedDisputesInput = {
@@ -2472,6 +2790,12 @@ export type UserUpdateWithoutDisputesInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDisputesInput = {
@@ -2510,6 +2834,12 @@ export type UserUncheckedUpdateWithoutDisputesInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUpsertWithoutResolvedDisputesInput = {
@@ -2559,6 +2889,12 @@ export type UserUpdateWithoutResolvedDisputesInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResolvedDisputesInput = {
@@ -2597,6 +2933,12 @@ export type UserUncheckedUpdateWithoutResolvedDisputesInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateWithoutRefereeApplicationsInput = {
@@ -2635,6 +2977,12 @@ export type UserCreateWithoutRefereeApplicationsInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutRefereeApplicationsInput = {
@@ -2673,6 +3021,12 @@ export type UserUncheckedCreateWithoutRefereeApplicationsInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutRefereeApplicationsInput = {
@@ -2716,6 +3070,12 @@ export type UserCreateWithoutReviewedApplicationsInput = {
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutReviewedApplicationsInput = {
@@ -2754,6 +3114,12 @@ export type UserUncheckedCreateWithoutReviewedApplicationsInput = {
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutReviewedApplicationsInput = {
@@ -2808,6 +3174,12 @@ export type UserUpdateWithoutRefereeApplicationsInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefereeApplicationsInput = {
@@ -2846,6 +3218,12 @@ export type UserUncheckedUpdateWithoutRefereeApplicationsInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUpsertWithoutReviewedApplicationsInput = {
@@ -2895,6 +3273,12 @@ export type UserUpdateWithoutReviewedApplicationsInput = {
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedApplicationsInput = {
@@ -2933,6 +3317,12 @@ export type UserUncheckedUpdateWithoutReviewedApplicationsInput = {
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserCreateWithoutAdminLogsInput = {
@@ -2971,6 +3361,12 @@ export type UserCreateWithoutAdminLogsInput = {
   reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutAdminLogsInput = {
@@ -3009,6 +3405,12 @@ export type UserUncheckedCreateWithoutAdminLogsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutAdminLogsInput = {
@@ -3063,6 +3465,12 @@ export type UserUpdateWithoutAdminLogsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdminLogsInput = {
@@ -3101,6 +3509,1164 @@ export type UserUncheckedUpdateWithoutAdminLogsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserCreateWithoutFriendRequestsSentInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
+}
+
+export type UserUncheckedCreateWithoutFriendRequestsSentInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingUncheckedCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventUncheckedCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
+}
+
+export type UserCreateOrConnectWithoutFriendRequestsSentInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsSentInput, Prisma.UserUncheckedCreateWithoutFriendRequestsSentInput>
+}
+
+export type UserCreateWithoutFriendRequestsReceivedInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
+}
+
+export type UserUncheckedCreateWithoutFriendRequestsReceivedInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingUncheckedCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventUncheckedCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
+}
+
+export type UserCreateOrConnectWithoutFriendRequestsReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsReceivedInput, Prisma.UserUncheckedCreateWithoutFriendRequestsReceivedInput>
+}
+
+export type UserUpsertWithoutFriendRequestsSentInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFriendRequestsSentInput, Prisma.UserUncheckedUpdateWithoutFriendRequestsSentInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsSentInput, Prisma.UserUncheckedCreateWithoutFriendRequestsSentInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFriendRequestsSentInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFriendRequestsSentInput, Prisma.UserUncheckedUpdateWithoutFriendRequestsSentInput>
+}
+
+export type UserUpdateWithoutFriendRequestsSentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFriendRequestsSentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUncheckedUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUncheckedUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUncheckedUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUncheckedUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUncheckedUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserUpsertWithoutFriendRequestsReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFriendRequestsReceivedInput, Prisma.UserUncheckedUpdateWithoutFriendRequestsReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFriendRequestsReceivedInput, Prisma.UserUncheckedCreateWithoutFriendRequestsReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFriendRequestsReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFriendRequestsReceivedInput, Prisma.UserUncheckedUpdateWithoutFriendRequestsReceivedInput>
+}
+
+export type UserUpdateWithoutFriendRequestsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFriendRequestsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUncheckedUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUncheckedUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUncheckedUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUncheckedUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUncheckedUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserCreateWithoutLedPartiesInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
+}
+
+export type UserUncheckedCreateWithoutLedPartiesInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingUncheckedCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventUncheckedCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
+}
+
+export type UserCreateOrConnectWithoutLedPartiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutLedPartiesInput, Prisma.UserUncheckedCreateWithoutLedPartiesInput>
+}
+
+export type UserUpsertWithoutLedPartiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutLedPartiesInput, Prisma.UserUncheckedUpdateWithoutLedPartiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutLedPartiesInput, Prisma.UserUncheckedCreateWithoutLedPartiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutLedPartiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutLedPartiesInput, Prisma.UserUncheckedUpdateWithoutLedPartiesInput>
+}
+
+export type UserUpdateWithoutLedPartiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserUncheckedUpdateWithoutLedPartiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUncheckedUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUncheckedUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUncheckedUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUncheckedUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUncheckedUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserCreateWithoutPartyMembershipsInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
+}
+
+export type UserUncheckedCreateWithoutPartyMembershipsInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingUncheckedCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventUncheckedCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
+}
+
+export type UserCreateOrConnectWithoutPartyMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPartyMembershipsInput, Prisma.UserUncheckedCreateWithoutPartyMembershipsInput>
+}
+
+export type UserUpsertWithoutPartyMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPartyMembershipsInput, Prisma.UserUncheckedUpdateWithoutPartyMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPartyMembershipsInput, Prisma.UserUncheckedCreateWithoutPartyMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPartyMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPartyMembershipsInput, Prisma.UserUncheckedUpdateWithoutPartyMembershipsInput>
+}
+
+export type UserUpdateWithoutPartyMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPartyMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUncheckedUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUncheckedUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUncheckedUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUncheckedUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUncheckedUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserCreateWithoutPartyInvitesSentInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
+}
+
+export type UserUncheckedCreateWithoutPartyInvitesSentInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingUncheckedCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventUncheckedCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
+}
+
+export type UserCreateOrConnectWithoutPartyInvitesSentInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesSentInput, Prisma.UserUncheckedCreateWithoutPartyInvitesSentInput>
+}
+
+export type UserCreateWithoutPartyInvitesReceivedInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+}
+
+export type UserUncheckedCreateWithoutPartyInvitesReceivedInput = {
+  id?: string
+  phone: string
+  email?: string | null
+  name: string
+  handle: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  isAdmin?: boolean
+  isReferee?: boolean
+  avatar: string
+  city?: string | null
+  district?: string | null
+  heightCm?: number | null
+  position?: string | null
+  dominantHand?: string | null
+  playStyle?: string | null
+  creditScore?: number
+  adminNote?: string | null
+  rankTitle?: string
+  favoriteCourt?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  ratings?: Prisma.PlayerRatingUncheckedCreateNestedManyWithoutUserInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedCreateNestedManyWithoutUserInput
+  createdMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutCreatedByInput
+  refereeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutRefereeInput
+  events?: Prisma.RefereeEventUncheckedCreateNestedManyWithoutActorInput
+  disputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutCreatorInput
+  resolvedDisputes?: Prisma.DisputeUncheckedCreateNestedManyWithoutResolvedByInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  reviewedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutReviewedByInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutUserInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
+  violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
+  createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+}
+
+export type UserCreateOrConnectWithoutPartyInvitesReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesReceivedInput, Prisma.UserUncheckedCreateWithoutPartyInvitesReceivedInput>
+}
+
+export type UserUpsertWithoutPartyInvitesSentInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPartyInvitesSentInput, Prisma.UserUncheckedUpdateWithoutPartyInvitesSentInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesSentInput, Prisma.UserUncheckedCreateWithoutPartyInvitesSentInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPartyInvitesSentInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPartyInvitesSentInput, Prisma.UserUncheckedUpdateWithoutPartyInvitesSentInput>
+}
+
+export type UserUpdateWithoutPartyInvitesSentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPartyInvitesSentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUncheckedUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUncheckedUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUncheckedUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUncheckedUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUncheckedUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
+}
+
+export type UserUpsertWithoutPartyInvitesReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPartyInvitesReceivedInput, Prisma.UserUncheckedUpdateWithoutPartyInvitesReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPartyInvitesReceivedInput, Prisma.UserUncheckedCreateWithoutPartyInvitesReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPartyInvitesReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPartyInvitesReceivedInput, Prisma.UserUncheckedUpdateWithoutPartyInvitesReceivedInput>
+}
+
+export type UserUpdateWithoutPartyInvitesReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPartyInvitesReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  handle?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  isAdmin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isReferee?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  avatar?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  heightCm?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  position?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dominantHand?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  playStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditScore?: Prisma.IntFieldUpdateOperationsInput | number
+  adminNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rankTitle?: Prisma.StringFieldUpdateOperationsInput | string
+  favoriteCourt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.PlayerRatingUncheckedUpdateManyWithoutUserNestedInput
+  matchPlayers?: Prisma.MatchPlayerUncheckedUpdateManyWithoutUserNestedInput
+  createdMatches?: Prisma.MatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  refereeMatches?: Prisma.MatchUncheckedUpdateManyWithoutRefereeNestedInput
+  events?: Prisma.RefereeEventUncheckedUpdateManyWithoutActorNestedInput
+  disputes?: Prisma.DisputeUncheckedUpdateManyWithoutCreatorNestedInput
+  resolvedDisputes?: Prisma.DisputeUncheckedUpdateManyWithoutResolvedByNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  reviewedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutReviewedByNestedInput
+  refereeApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutUserNestedInput
+  reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+  adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
+  violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
+  createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
 }
 
 export type UserCreateWithoutViolationsInput = {
@@ -3139,6 +4705,12 @@ export type UserCreateWithoutViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   createdViolations?: Prisma.ViolationRecordCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutViolationsInput = {
@@ -3177,6 +4749,12 @@ export type UserUncheckedCreateWithoutViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   createdViolations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutViolationsInput = {
@@ -3220,6 +4798,12 @@ export type UserCreateWithoutCreatedViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationCreateNestedManyWithoutReviewedByInput
   adminLogs?: Prisma.AdminLogCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordCreateNestedManyWithoutUserInput
+  friendRequestsSent?: Prisma.FriendshipCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteCreateNestedManyWithoutInviteeInput
 }
 
 export type UserUncheckedCreateWithoutCreatedViolationsInput = {
@@ -3258,6 +4842,12 @@ export type UserUncheckedCreateWithoutCreatedViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   adminLogs?: Prisma.AdminLogUncheckedCreateNestedManyWithoutAdminInput
   violations?: Prisma.ViolationRecordUncheckedCreateNestedManyWithoutUserInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+  ledParties?: Prisma.PartyUncheckedCreateNestedManyWithoutLeaderInput
+  partyMemberships?: Prisma.PartyMemberUncheckedCreateNestedManyWithoutUserInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviterInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedCreateNestedManyWithoutInviteeInput
 }
 
 export type UserCreateOrConnectWithoutCreatedViolationsInput = {
@@ -3312,6 +4902,12 @@ export type UserUpdateWithoutViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   createdViolations?: Prisma.ViolationRecordUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutViolationsInput = {
@@ -3350,6 +4946,12 @@ export type UserUncheckedUpdateWithoutViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   createdViolations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUpsertWithoutCreatedViolationsInput = {
@@ -3399,6 +5001,12 @@ export type UserUpdateWithoutCreatedViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUpdateManyWithoutReviewedByNestedInput
   adminLogs?: Prisma.AdminLogUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUpdateManyWithoutUserNestedInput
+  friendRequestsSent?: Prisma.FriendshipUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUpdateManyWithoutInviteeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedViolationsInput = {
@@ -3437,6 +5045,12 @@ export type UserUncheckedUpdateWithoutCreatedViolationsInput = {
   reviewedApplications?: Prisma.RefereeApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   adminLogs?: Prisma.AdminLogUncheckedUpdateManyWithoutAdminNestedInput
   violations?: Prisma.ViolationRecordUncheckedUpdateManyWithoutUserNestedInput
+  friendRequestsSent?: Prisma.FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestsReceived?: Prisma.FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+  ledParties?: Prisma.PartyUncheckedUpdateManyWithoutLeaderNestedInput
+  partyMemberships?: Prisma.PartyMemberUncheckedUpdateManyWithoutUserNestedInput
+  partyInvitesSent?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviterNestedInput
+  partyInvitesReceived?: Prisma.PartyInviteUncheckedUpdateManyWithoutInviteeNestedInput
 }
 
 
@@ -3459,6 +5073,12 @@ export type UserCountOutputType = {
   adminLogs: number
   violations: number
   createdViolations: number
+  friendRequestsSent: number
+  friendRequestsReceived: number
+  ledParties: number
+  partyMemberships: number
+  partyInvitesSent: number
+  partyInvitesReceived: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3476,6 +5096,12 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   adminLogs?: boolean | UserCountOutputTypeCountAdminLogsArgs
   violations?: boolean | UserCountOutputTypeCountViolationsArgs
   createdViolations?: boolean | UserCountOutputTypeCountCreatedViolationsArgs
+  friendRequestsSent?: boolean | UserCountOutputTypeCountFriendRequestsSentArgs
+  friendRequestsReceived?: boolean | UserCountOutputTypeCountFriendRequestsReceivedArgs
+  ledParties?: boolean | UserCountOutputTypeCountLedPartiesArgs
+  partyMemberships?: boolean | UserCountOutputTypeCountPartyMembershipsArgs
+  partyInvitesSent?: boolean | UserCountOutputTypeCountPartyInvitesSentArgs
+  partyInvitesReceived?: boolean | UserCountOutputTypeCountPartyInvitesReceivedArgs
 }
 
 /**
@@ -3586,6 +5212,48 @@ export type UserCountOutputTypeCountCreatedViolationsArgs<ExtArgs extends runtim
   where?: Prisma.ViolationRecordWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFriendRequestsSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FriendshipWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFriendRequestsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FriendshipWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountLedPartiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PartyWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPartyMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PartyMemberWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPartyInvitesSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PartyInviteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPartyInvitesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PartyInviteWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3624,6 +5292,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   adminLogs?: boolean | Prisma.User$adminLogsArgs<ExtArgs>
   violations?: boolean | Prisma.User$violationsArgs<ExtArgs>
   createdViolations?: boolean | Prisma.User$createdViolationsArgs<ExtArgs>
+  friendRequestsSent?: boolean | Prisma.User$friendRequestsSentArgs<ExtArgs>
+  friendRequestsReceived?: boolean | Prisma.User$friendRequestsReceivedArgs<ExtArgs>
+  ledParties?: boolean | Prisma.User$ledPartiesArgs<ExtArgs>
+  partyMemberships?: boolean | Prisma.User$partyMembershipsArgs<ExtArgs>
+  partyInvitesSent?: boolean | Prisma.User$partyInvitesSentArgs<ExtArgs>
+  partyInvitesReceived?: boolean | Prisma.User$partyInvitesReceivedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3718,6 +5392,12 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   adminLogs?: boolean | Prisma.User$adminLogsArgs<ExtArgs>
   violations?: boolean | Prisma.User$violationsArgs<ExtArgs>
   createdViolations?: boolean | Prisma.User$createdViolationsArgs<ExtArgs>
+  friendRequestsSent?: boolean | Prisma.User$friendRequestsSentArgs<ExtArgs>
+  friendRequestsReceived?: boolean | Prisma.User$friendRequestsReceivedArgs<ExtArgs>
+  ledParties?: boolean | Prisma.User$ledPartiesArgs<ExtArgs>
+  partyMemberships?: boolean | Prisma.User$partyMembershipsArgs<ExtArgs>
+  partyInvitesSent?: boolean | Prisma.User$partyInvitesSentArgs<ExtArgs>
+  partyInvitesReceived?: boolean | Prisma.User$partyInvitesReceivedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3740,6 +5420,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     adminLogs: Prisma.$AdminLogPayload<ExtArgs>[]
     violations: Prisma.$ViolationRecordPayload<ExtArgs>[]
     createdViolations: Prisma.$ViolationRecordPayload<ExtArgs>[]
+    friendRequestsSent: Prisma.$FriendshipPayload<ExtArgs>[]
+    friendRequestsReceived: Prisma.$FriendshipPayload<ExtArgs>[]
+    ledParties: Prisma.$PartyPayload<ExtArgs>[]
+    partyMemberships: Prisma.$PartyMemberPayload<ExtArgs>[]
+    partyInvitesSent: Prisma.$PartyInvitePayload<ExtArgs>[]
+    partyInvitesReceived: Prisma.$PartyInvitePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4172,6 +5858,12 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   adminLogs<T extends Prisma.User$adminLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$adminLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   violations<T extends Prisma.User$violationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$violationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdViolations<T extends Prisma.User$createdViolationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdViolationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  friendRequestsSent<T extends Prisma.User$friendRequestsSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendRequestsSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  friendRequestsReceived<T extends Prisma.User$friendRequestsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendRequestsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ledParties<T extends Prisma.User$ledPartiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ledPartiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PartyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  partyMemberships<T extends Prisma.User$partyMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$partyMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PartyMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  partyInvitesSent<T extends Prisma.User$partyInvitesSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$partyInvitesSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PartyInvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  partyInvitesReceived<T extends Prisma.User$partyInvitesReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$partyInvitesReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PartyInvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4949,6 +6641,150 @@ export type User$createdViolationsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ViolationRecordScalarFieldEnum | Prisma.ViolationRecordScalarFieldEnum[]
+}
+
+/**
+ * User.friendRequestsSent
+ */
+export type User$friendRequestsSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Friendship
+   */
+  select?: Prisma.FriendshipSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Friendship
+   */
+  omit?: Prisma.FriendshipOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FriendshipInclude<ExtArgs> | null
+  where?: Prisma.FriendshipWhereInput
+  orderBy?: Prisma.FriendshipOrderByWithRelationInput | Prisma.FriendshipOrderByWithRelationInput[]
+  cursor?: Prisma.FriendshipWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FriendshipScalarFieldEnum | Prisma.FriendshipScalarFieldEnum[]
+}
+
+/**
+ * User.friendRequestsReceived
+ */
+export type User$friendRequestsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Friendship
+   */
+  select?: Prisma.FriendshipSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Friendship
+   */
+  omit?: Prisma.FriendshipOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FriendshipInclude<ExtArgs> | null
+  where?: Prisma.FriendshipWhereInput
+  orderBy?: Prisma.FriendshipOrderByWithRelationInput | Prisma.FriendshipOrderByWithRelationInput[]
+  cursor?: Prisma.FriendshipWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FriendshipScalarFieldEnum | Prisma.FriendshipScalarFieldEnum[]
+}
+
+/**
+ * User.ledParties
+ */
+export type User$ledPartiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Party
+   */
+  select?: Prisma.PartySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Party
+   */
+  omit?: Prisma.PartyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PartyInclude<ExtArgs> | null
+  where?: Prisma.PartyWhereInput
+  orderBy?: Prisma.PartyOrderByWithRelationInput | Prisma.PartyOrderByWithRelationInput[]
+  cursor?: Prisma.PartyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PartyScalarFieldEnum | Prisma.PartyScalarFieldEnum[]
+}
+
+/**
+ * User.partyMemberships
+ */
+export type User$partyMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PartyMember
+   */
+  select?: Prisma.PartyMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PartyMember
+   */
+  omit?: Prisma.PartyMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PartyMemberInclude<ExtArgs> | null
+  where?: Prisma.PartyMemberWhereInput
+  orderBy?: Prisma.PartyMemberOrderByWithRelationInput | Prisma.PartyMemberOrderByWithRelationInput[]
+  cursor?: Prisma.PartyMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PartyMemberScalarFieldEnum | Prisma.PartyMemberScalarFieldEnum[]
+}
+
+/**
+ * User.partyInvitesSent
+ */
+export type User$partyInvitesSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PartyInvite
+   */
+  select?: Prisma.PartyInviteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PartyInvite
+   */
+  omit?: Prisma.PartyInviteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PartyInviteInclude<ExtArgs> | null
+  where?: Prisma.PartyInviteWhereInput
+  orderBy?: Prisma.PartyInviteOrderByWithRelationInput | Prisma.PartyInviteOrderByWithRelationInput[]
+  cursor?: Prisma.PartyInviteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PartyInviteScalarFieldEnum | Prisma.PartyInviteScalarFieldEnum[]
+}
+
+/**
+ * User.partyInvitesReceived
+ */
+export type User$partyInvitesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PartyInvite
+   */
+  select?: Prisma.PartyInviteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PartyInvite
+   */
+  omit?: Prisma.PartyInviteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PartyInviteInclude<ExtArgs> | null
+  where?: Prisma.PartyInviteWhereInput
+  orderBy?: Prisma.PartyInviteOrderByWithRelationInput | Prisma.PartyInviteOrderByWithRelationInput[]
+  cursor?: Prisma.PartyInviteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PartyInviteScalarFieldEnum | Prisma.PartyInviteScalarFieldEnum[]
 }
 
 /**

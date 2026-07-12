@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdminActionButton, AdminActionForm } from "@/components/admin/AdminActions";
+import { RankBadge } from "@/components/RankBadge";
 import {
   AdminBadge,
   AdminPageHeader,
@@ -94,7 +95,7 @@ export default async function AdminUserDetailPage({
                     <div className="text-sm font-bold text-slate-400">{MATCH_TYPE_LABEL[rating.mode]}</div>
                     <div className="mt-3 flex items-end gap-3">
                       <span className="text-3xl font-black text-white">{rating.rating}</span>
-                      <span className="pb-1 text-sm font-bold text-orange-300">{user.rankTitle}</span>
+                      <RankBadge rating={rating.rating} size="sm" className="mb-1" />
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-3 text-sm">
                       <DetailItem label="胜 / 负">{rating.wins} / {rating.losses}</DetailItem>

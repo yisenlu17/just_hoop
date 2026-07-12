@@ -67,6 +67,19 @@ enum DisputeStatus {
   REJECTED
 }
 
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+enum PartyInviteStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  CANCELLED
+}
+
 enum EventType {
   CREATE
   JOIN
@@ -107,7 +120,7 @@ model User {
   playStyle            String?
   creditScore          Int                  @default(100)
   adminNote            String?
-  rankTitle            String               @default("青铜 III")
+  rankTitle            String               @default("白银 IV")
   favoriteCourt        String?
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @default(now()) @updatedAt
@@ -125,6 +138,12 @@ model User {
   adminLogs            AdminLog[]           @relation("AdminLogActor")
   violations           ViolationRecord[]    @relation("ViolationUser")
   createdViolations    ViolationRecord[]    @relation("ViolationCreator")
+  friendRequestsSent     Friendship[]  @relation("FriendRequester")
+  friendRequestsReceived Friendship[]  @relation("FriendAddressee")
+  ledParties             Party[]       @relation("PartyLeader")
+  partyMemberships       PartyMember[] @relation("PartyMemberUser")
+  partyInvitesSent       PartyInvite[] @relation("PartyInviter")
+  partyInvitesReceived   PartyInvite[] @relation("PartyInvitee")
 
   @@index([role, status])
   @@index([isAdmin])
@@ -300,6 +319,66 @@ model AdminLog {
   @@index([targetType, targetId])
   @@index([adminId])
   @@map("admin_logs")
+}
+
+// 好友关系：requester 发起申请，addressee 接受后即互为好友。
+model Friendship {
+  id          String           @id @default(cuid())
+  requesterId String
+  addresseeId String
+  status      FriendshipStatus @default(PENDING)
+  createdAt   DateTime         @default(now())
+  respondedAt DateTime?
+  requester   User             @relation("FriendRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee   User             @relation("FriendAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, addresseeId])
+  @@index([addresseeId, status])
+  @@index([requesterId, status])
+}
+
+// 赛前组队大厅（王者荣耀式席位）：队长建队、好友受邀入席，整队一起匹配。
+model Party {
+  id        String        @id @default(cuid())
+  leaderId  String
+  mode      MatchMode     @default(CASUAL)
+  type      MatchType     @default(THREE_V_THREE)
+  matchId   String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  leader    User          @relation("PartyLeader", fields: [leaderId], references: [id], onDelete: Cascade)
+  members   PartyMember[]
+  invites   PartyInvite[]
+
+  @@index([leaderId])
+}
+
+model PartyMember {
+  id       String   @id @default(cuid())
+  partyId  String
+  userId   String   @unique // 同一时间只能在一个队伍里
+  seat     Int
+  joinedAt DateTime @default(now())
+  party    Party    @relation(fields: [partyId], references: [id], onDelete: Cascade)
+  user     User     @relation("PartyMemberUser", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([partyId, userId])
+}
+
+model PartyInvite {
+  id          String            @id @default(cuid())
+  partyId     String
+  inviterId   String
+  inviteeId   String
+  status      PartyInviteStatus @default(PENDING)
+  createdAt   DateTime          @default(now())
+  respondedAt DateTime?
+  party       Party             @relation(fields: [partyId], references: [id], onDelete: Cascade)
+  inviter     User              @relation("PartyInviter", fields: [inviterId], references: [id], onDelete: Cascade)
+  invitee     User              @relation("PartyInvitee", fields: [inviteeId], references: [id], onDelete: Cascade)
+
+  @@index([inviteeId, status])
+  @@index([partyId, status])
 }
 
 model ViolationRecord {

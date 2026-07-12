@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 export const AUTH_COOKIE = "justhoop_user";
@@ -18,22 +19,31 @@ export async function getAuthenticatedUser() {
   return getCookieUser();
 }
 
+// 只返回真正登录（持有 cookie）的用户，未登录返回 null。
 export async function getCurrentUser() {
-  const user = await getCookieUser();
-
-  if (user) return user;
-
-  return prisma.user.findFirst({
-    where: { role: "PLAYER" },
-    include: { ratings: true },
-    orderBy: { createdAt: "asc" },
-  });
+  return getCookieUser();
 }
 
+// 页面级守卫：未登录直接跳转登录页，返回值保证非空。
+export async function requirePageUser() {
+  const user = await getCookieUser();
+  if (!user) redirect("/login");
+  return user;
+}
+
+// 裁判页守卫：未登录跳登录；已登录但非裁判/运营，引导去申请成为裁判。
+export async function requireRefereePage() {
+  const user = await getCookieUser();
+  if (!user) redirect("/login");
+  if (!user.isReferee && !user.isAdmin) redirect("/player/referee-application");
+  return user;
+}
+
+// 接口级守卫：未登录抛出（由调用方转成 401）。
 export async function requireCurrentUser() {
-  const user = await getCurrentUser();
+  const user = await getCookieUser();
   if (!user) {
-    throw new Error("缺少测试账号，请先初始化数据库。");
+    throw new Error("未登录");
   }
   return user;
 }

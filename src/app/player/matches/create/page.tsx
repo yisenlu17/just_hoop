@@ -1,10 +1,10 @@
 import { AppShell } from "@/components/AppShell";
 import { CreateMatchForm } from "@/components/CreateMatchForm";
 import { Panel, Pill } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requirePageUser } from "@/lib/auth";
 
 export default async function CreateMatchPage() {
-  const user = await getCurrentUser();
+  const user = await requirePageUser();
 
   return (
     <AppShell user={user} active="比赛">
@@ -16,7 +16,7 @@ export default async function CreateMatchPage() {
         <Panel className="p-4 sm:p-5">
           <div className="mb-4 flex flex-wrap gap-2">
             <Pill tone="green">房主自动加入 A 队</Pill>
-            <Pill tone="gold">排位赛结算 Rating</Pill>
+            <Pill tone="gold">排位赛结算段位积分</Pill>
             <Pill tone="blue">外部直播链接</Pill>
           </div>
           <CreateMatchForm />

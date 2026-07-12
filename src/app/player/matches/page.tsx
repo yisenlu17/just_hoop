@@ -1,7 +1,7 @@
 import { AppShell } from "@/components/AppShell";
 import { MatchCard } from "@/components/MatchCard";
 import { ButtonLink, Panel } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requirePageUser } from "@/lib/auth";
 import { getMatches } from "@/lib/data";
 import { MATCH_MODE_LABEL, MATCH_TYPE_LABEL } from "@/lib/domain";
 
@@ -10,7 +10,7 @@ export default async function MatchesPage({
 }: {
   searchParams: Promise<{ mode?: string; type?: string }>;
 }) {
-  const [{ mode, type }, user] = await Promise.all([searchParams, getCurrentUser()]);
+  const [{ mode, type }, user] = await Promise.all([searchParams, requirePageUser()]);
   const matches = await getMatches({
     ...(mode === "RANKED" || mode === "CASUAL" ? { mode } : {}),
     ...(type === "ONE_V_ONE" || type === "THREE_V_THREE" ? { type } : {}),

@@ -93,6 +93,25 @@ export const DisputeStatus = {
 export type DisputeStatus = (typeof DisputeStatus)[keyof typeof DisputeStatus]
 
 
+export const FriendshipStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED'
+} as const
+
+export type FriendshipStatus = (typeof FriendshipStatus)[keyof typeof FriendshipStatus]
+
+
+export const PartyInviteStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type PartyInviteStatus = (typeof PartyInviteStatus)[keyof typeof PartyInviteStatus]
+
+
 export const EventType = {
   CREATE: 'CREATE',
   JOIN: 'JOIN',

@@ -1,7 +1,8 @@
 import { Crown, Medal, Trophy } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { RankBadge } from "@/components/RankBadge";
 import { Avatar, ButtonLink, Panel, Pill } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requirePageUser } from "@/lib/auth";
 import { getLeaderboard } from "@/lib/data";
 import { MATCH_TYPE_LABEL } from "@/lib/domain";
 
@@ -10,7 +11,7 @@ export default async function RankingsPage({
 }: {
   searchParams: Promise<{ type?: string }>;
 }) {
-  const [{ type }, user] = await Promise.all([searchParams, getCurrentUser()]);
+  const [{ type }, user] = await Promise.all([searchParams, requirePageUser()]);
   const mode = type === "THREE_V_THREE" ? "THREE_V_THREE" : "ONE_V_ONE";
   const leaderboard = await getLeaderboard(mode);
   const topThree = leaderboard.slice(0, 3);
@@ -46,7 +47,10 @@ export default async function RankingsPage({
                   <Avatar label={rating.user.avatar} size="lg" />
                   <div>
                     <div className="text-xl font-black text-white">{rating.user.name}</div>
-                    <div className="text-sm font-bold text-slate-500">{rating.user.handle}</div>
+                    <div className="mt-1 flex items-center gap-2">
+                      <RankBadge rating={rating.rating} size="sm" />
+                      <span className="text-sm font-bold text-slate-500">{rating.user.handle}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -66,7 +70,10 @@ export default async function RankingsPage({
                   <Avatar label={rating.user.avatar} size="sm" />
                   <div className="min-w-0">
                     <div className="truncate text-sm font-black text-white">{rating.user.name}</div>
-                    <div className="truncate text-xs font-bold text-slate-500">{rating.user.handle}</div>
+                    <div className="mt-0.5 flex items-center gap-2">
+                      <RankBadge rating={rating.rating} size="sm" showIcon={false} />
+                      <span className="truncate text-xs font-bold text-slate-500">{rating.user.handle}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="hidden text-sm font-black text-slate-400 sm:block">{rating.wins}W / {rating.losses}L</div>

@@ -8,7 +8,7 @@ export default async function LoginPage() {
   const [user, accounts] = await Promise.all([getCurrentUser(), getAccounts()]);
 
   return (
-    <AppShell user={user} active="">
+    <AppShell user={user} active="" showBack={false}>
       <div className="mx-auto max-w-5xl">
         <div className="mb-5">
           <h1 className="text-3xl font-black text-white">测试账号登录</h1>

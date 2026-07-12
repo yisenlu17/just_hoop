@@ -13,7 +13,7 @@ export function LobbyActions() {
         <span className="mt-2 block text-sm font-black text-black/70">选时间和球馆，系统先帮你找局</span>
         <span className="mt-5 inline-flex items-center gap-2 rounded-lg bg-black/15 px-3 py-2 text-xs font-black">
           <MapPinned className="h-4 w-4" />
-          单人快速匹配
+          可邀好友组队开黑
         </span>
       </Link>
       <Link
@@ -22,7 +22,7 @@ export function LobbyActions() {
       >
         <Trophy className="mb-5 h-8 w-8" />
         <span className="block text-3xl font-black tracking-normal">我要排位</span>
-        <span className="mt-2 block text-sm font-black text-black/70">按 Rating 区间寻找上分房</span>
+        <span className="mt-2 block text-sm font-black text-black/70">系统自动匹配同段或相邻段位</span>
         <span className="mt-5 inline-flex items-center gap-2 rounded-lg bg-black/15 px-3 py-2 text-xs font-black">
           <Crosshair className="h-4 w-4" />
           远程裁判排位

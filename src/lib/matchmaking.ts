@@ -7,7 +7,11 @@ import {
   formatTime,
   MATCH_MODE_LABEL,
   MATCH_TYPE_LABEL,
+  RANK_TIERS,
+  RANK_TIER_ORDER,
+  rankFromRating,
   scheduledAtFrom,
+  shanghaiDayRange,
   SKILL_LEVEL_LABEL,
   TIME_SLOT_LABEL,
 } from "@/lib/domain";
@@ -22,29 +26,84 @@ export const matchmakingSchema = z.object({
   district: z.string().min(1).max(30),
   gym: z.string().min(1).max(50),
   skillLevel: z.enum(["BEGINNER", "INTERMEDIATE", "ADVANCED", "OPEN"]).optional(),
-  ratingMin: z.number().int().min(0).max(3000).optional(),
-  ratingMax: z.number().int().min(0).max(3000).optional(),
 });
 
 export type MatchmakingInput = z.infer<typeof matchmakingSchema>;
 
 export function normalizeMatchmakingInput(input: MatchmakingInput) {
-  const ratingMin = input.mode === "RANKED" ? input.ratingMin ?? 900 : undefined;
-  const ratingMax = input.mode === "RANKED" ? input.ratingMax ?? 1400 : undefined;
   return {
     ...input,
     skillLevel: input.mode === "CASUAL" ? input.skillLevel ?? "OPEN" : undefined,
-    ratingMin,
-    ratingMax: ratingMax && ratingMin && ratingMax < ratingMin ? ratingMin : ratingMax,
   };
 }
 
-export function buildMatchmakingWhere(input: MatchmakingInput, userId: string): Prisma.MatchWhereInput {
+type RatingCarrier = { ratings: Array<{ mode: string; rating: number }> };
+
+export function ratingForMatchType(player: RatingCarrier, type: string) {
+  return player.ratings.find((rating) => rating.mode === type)?.rating ?? 1000;
+}
+
+function rankTierIndex(player: RatingCarrier, type: string) {
+  const key = rankFromRating(ratingForMatchType(player, type)).key;
+  return RANK_TIER_ORDER.indexOf(key);
+}
+
+export function rankedGroupIsCompatible(players: RatingCarrier[], type: string) {
+  const indexes = players.map((player) => rankTierIndex(player, type));
+  return !indexes.length || Math.max(...indexes) - Math.min(...indexes) <= 1;
+}
+
+export function rankedRoomAllowsPlayers(
+  match: Pick<MatchWithRelations, "type" | "players">,
+  candidates: RatingCarrier[],
+) {
+  return rankedGroupIsCompatible(
+    [...match.players.map((player) => player.user), ...candidates],
+    match.type,
+  );
+}
+
+// 房间保留数字区间仅用于兼容数据库和后台；玩家端不会显示或手动选择。
+export function rankedRatingWindow(players: RatingCarrier[], type: string) {
+  const indexes = players.map((player) => rankTierIndex(player, type));
+  const lowest = Math.min(...indexes);
+  const highest = Math.max(...indexes);
+  const allowedLowest = Math.max(0, highest - 1);
+  const allowedHighest = Math.min(RANK_TIERS.length - 1, lowest + 1);
+  return {
+    min: allowedLowest === 0 ? 0 : RANK_TIERS[allowedLowest].base,
+    max:
+      allowedHighest === RANK_TIERS.length - 1
+        ? 3000
+        : RANK_TIERS[allowedHighest + 1].base - 1,
+  };
+}
+
+// 整队寻找可容纳 size 人的同队位置；返回每个人的 (team, slot)，放不下返回 null。
+export function teamPlacementFor(
+  players: Array<{ team: string }>,
+  type: string,
+  size: number,
+): Array<{ team: string; slot: number }> | null {
+  const perTeam = type === "THREE_V_THREE" ? 3 : 1;
+  const a = players.filter((player) => player.team === "A").length;
+  const b = players.filter((player) => player.team === "B").length;
+  const freeA = perTeam - a;
+  const freeB = perTeam - b;
+  let team: "A" | "B" | null = null;
+  if (freeA >= size && (a <= b || freeB < size)) team = "A";
+  else if (freeB >= size) team = "B";
+  else if (freeA >= size) team = "A";
+  if (!team) return null;
+  const base = team === "A" ? a : b;
+  return Array.from({ length: size }, (_, index) => ({ team: team as string, slot: base + index + 1 }));
+}
+
+export function buildMatchmakingWhere(input: MatchmakingInput, userIds: string[]): Prisma.MatchWhereInput {
   const normalized = normalizeMatchmakingInput(input);
   const skillLevel = normalized.skillLevel ?? "OPEN";
-  const start = new Date(`${normalized.date}T00:00:00`);
-  const end = new Date(start);
-  end.setDate(end.getDate() + 1);
+  const { start, end } = shanghaiDayRange(normalized.date);
+  const upcomingStart = new Date(Math.max(start.getTime(), Date.now()));
 
   return {
     mode: normalized.mode,
@@ -53,7 +112,7 @@ export function buildMatchmakingWhere(input: MatchmakingInput, userId: string): 
       in: ["OPEN", "PENDING_PAYMENT", "PENDING_REFEREE"],
     },
     scheduledAt: {
-      gte: start,
+      gte: upcomingStart,
       lt: end,
     },
     timeSlot: normalized.timeSlot,
@@ -69,23 +128,13 @@ export function buildMatchmakingWhere(input: MatchmakingInput, userId: string): 
       : {}),
     players: {
       none: {
-        userId,
+        userId: { in: userIds },
       },
     },
   };
 }
 
 export const matchmakingInclude = matchInclude;
-
-export function ratingOverlaps(match: Pick<MatchWithRelations, "ratingMin" | "ratingMax">, input: MatchmakingInput) {
-  const normalized = normalizeMatchmakingInput(input);
-  if (normalized.mode !== "RANKED") return true;
-  const requestedMin = normalized.ratingMin ?? 0;
-  const requestedMax = normalized.ratingMax ?? 3000;
-  const roomMin = match.ratingMin ?? 0;
-  const roomMax = match.ratingMax ?? 3000;
-  return roomMin <= requestedMax && roomMax >= requestedMin;
-}
 
 export function serializeMatchForMatchmaking(match: MatchWithRelations) {
   return {
@@ -106,8 +155,6 @@ export function serializeMatchForMatchmaking(match: MatchWithRelations) {
     timeSlotLabel: match.timeSlot ? TIME_SLOT_LABEL[match.timeSlot] ?? match.timeSlot : "时间待定",
     skillLevel: match.skillLevel,
     skillLevelLabel: match.skillLevel ? SKILL_LEVEL_LABEL[match.skillLevel] ?? match.skillLevel : null,
-    ratingMin: match.ratingMin,
-    ratingMax: match.ratingMax,
     playerCount: match.players.length,
     maxPlayers: match.maxPlayers,
     buyInLabel: formatMoney(match.buyInCents),

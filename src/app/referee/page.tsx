@@ -1,12 +1,12 @@
 import { Radio, ShieldAlert } from "lucide-react";
 import { AppShell, ModeMark } from "@/components/AppShell";
 import { Avatar, ButtonLink, Panel, Pill, StatusBadge } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requireRefereePage } from "@/lib/auth";
 import { getMatches } from "@/lib/data";
 import { formatLocation, formatTime } from "@/lib/domain";
 
 export default async function RefereePage() {
-  const user = await getCurrentUser();
+  const user = await requireRefereePage();
   const refereeTasks = await getMatches({
     status: {
       in: ["OPEN", "FULL", "PENDING_REFEREE", "SCHEDULED", "PRE_CHECK", "LIVE", "PAUSED", "FINISHED"],

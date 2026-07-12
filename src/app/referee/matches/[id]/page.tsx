@@ -3,7 +3,7 @@ import { ExternalLink, Radio } from "lucide-react";
 import { AppShell, ModeMark } from "@/components/AppShell";
 import { RefereeConsole } from "@/components/RefereeConsole";
 import { Avatar, ButtonLink, Panel, Pill, StatusBadge } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requireRefereePage } from "@/lib/auth";
 import { getMatch } from "@/lib/data";
 import { EVENT_LABEL, formatLocation, formatTime } from "@/lib/domain";
 
@@ -12,7 +12,7 @@ export default async function RefereeMatchPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const [{ id }, user] = await Promise.all([params, getCurrentUser()]);
+  const [{ id }, user] = await Promise.all([params, requireRefereePage()]);
   const match = await getMatch(id);
   if (!match) notFound();
 

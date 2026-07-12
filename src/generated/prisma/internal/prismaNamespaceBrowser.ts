@@ -60,6 +60,10 @@ export const ModelName = {
   Dispute: 'Dispute',
   RefereeApplication: 'RefereeApplication',
   AdminLog: 'AdminLog',
+  Friendship: 'Friendship',
+  Party: 'Party',
+  PartyMember: 'PartyMember',
+  PartyInvite: 'PartyInvite',
   ViolationRecord: 'ViolationRecord'
 } as const
 
@@ -253,6 +257,55 @@ export const AdminLogScalarFieldEnum = {
 } as const
 
 export type AdminLogScalarFieldEnum = (typeof AdminLogScalarFieldEnum)[keyof typeof AdminLogScalarFieldEnum]
+
+
+export const FriendshipScalarFieldEnum = {
+  id: 'id',
+  requesterId: 'requesterId',
+  addresseeId: 'addresseeId',
+  status: 'status',
+  createdAt: 'createdAt',
+  respondedAt: 'respondedAt'
+} as const
+
+export type FriendshipScalarFieldEnum = (typeof FriendshipScalarFieldEnum)[keyof typeof FriendshipScalarFieldEnum]
+
+
+export const PartyScalarFieldEnum = {
+  id: 'id',
+  leaderId: 'leaderId',
+  mode: 'mode',
+  type: 'type',
+  matchId: 'matchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartyScalarFieldEnum = (typeof PartyScalarFieldEnum)[keyof typeof PartyScalarFieldEnum]
+
+
+export const PartyMemberScalarFieldEnum = {
+  id: 'id',
+  partyId: 'partyId',
+  userId: 'userId',
+  seat: 'seat',
+  joinedAt: 'joinedAt'
+} as const
+
+export type PartyMemberScalarFieldEnum = (typeof PartyMemberScalarFieldEnum)[keyof typeof PartyMemberScalarFieldEnum]
+
+
+export const PartyInviteScalarFieldEnum = {
+  id: 'id',
+  partyId: 'partyId',
+  inviterId: 'inviterId',
+  inviteeId: 'inviteeId',
+  status: 'status',
+  createdAt: 'createdAt',
+  respondedAt: 'respondedAt'
+} as const
+
+export type PartyInviteScalarFieldEnum = (typeof PartyInviteScalarFieldEnum)[keyof typeof PartyInviteScalarFieldEnum]
 
 
 export const ViolationRecordScalarFieldEnum = {

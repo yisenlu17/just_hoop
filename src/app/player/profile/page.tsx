@@ -1,13 +1,17 @@
-import { Activity, MapPin, Trophy } from "lucide-react";
+import { Activity, MapPin } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { MatchCard } from "@/components/MatchCard";
+import { RankBadge, RankProgress } from "@/components/RankBadge";
 import { Avatar, ButtonLink, Panel, Pill } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requirePageUser } from "@/lib/auth";
 import { getMatches } from "@/lib/data";
 import { MATCH_TYPE_LABEL } from "@/lib/domain";
 
 export default async function ProfilePage() {
-  const user = await getCurrentUser();
+  const user = await requirePageUser();
+  const bestRating = user?.ratings.length
+    ? Math.max(...user.ratings.map((rating) => rating.rating))
+    : null;
   const matches = user
     ? await getMatches({
         players: {
@@ -29,8 +33,8 @@ export default async function ProfilePage() {
               <p className="mt-1 text-sm font-bold text-slate-500">{user?.handle}</p>
             </div>
           </div>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <Pill tone="gold"><Trophy className="mr-1 h-3 w-3" />{user?.rankTitle ?? "青铜"}</Pill>
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <RankBadge rating={bestRating} title={user?.rankTitle} />
             <Pill tone="blue"><MapPin className="mr-1 h-3 w-3" />{user?.favoriteCourt ?? "默认球场"}</Pill>
           </div>
           <ButtonLink href={user?.isReferee ? "/referee" : "/player/referee-application"} tone="dark" className="mt-5 w-full">
@@ -43,6 +47,10 @@ export default async function ProfilePage() {
                   <span className="text-sm font-black text-slate-300">{MATCH_TYPE_LABEL[rating.mode]}</span>
                   <span className="text-2xl font-black text-white">{rating.rating}</span>
                 </div>
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <RankBadge rating={rating.rating} size="sm" />
+                </div>
+                <RankProgress rating={rating.rating} className="mb-3" />
                 <div className="grid grid-cols-3 gap-2 text-center text-xs font-black text-slate-400">
                   <span>{rating.wins} 胜</span>
                   <span>{rating.losses} 负</span>

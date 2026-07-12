@@ -2,7 +2,7 @@ import { Trophy } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { MatchCard } from "@/components/MatchCard";
 import { ButtonLink, Panel, Pill } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requirePageUser } from "@/lib/auth";
 import { getMatches } from "@/lib/data";
 
 export default async function RankedPage({
@@ -10,7 +10,7 @@ export default async function RankedPage({
 }: {
   searchParams: Promise<{ type?: string }>;
 }) {
-  const [{ type }, user] = await Promise.all([searchParams, getCurrentUser()]);
+  const [{ type }, user] = await Promise.all([searchParams, requirePageUser()]);
   const matchType = type === "THREE_V_THREE" ? "THREE_V_THREE" : "ONE_V_ONE";
   const matches = await getMatches({
     mode: "RANKED",
@@ -24,8 +24,8 @@ export default async function RankedPage({
     <AppShell user={user} active="大厅">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-black text-white">排位房间</h1>
-          <p className="mt-1 text-sm font-bold text-slate-500">选择赛制后加入可上分房间，比赛确认后自动更新 Rating。</p>
+          <h1 className="text-3xl font-black text-white">推荐排位房间</h1>
+          <p className="mt-1 text-sm font-bold text-slate-500">选择赛制后加入同段或相邻段位房间，比赛确认后自动更新段位。</p>
         </div>
         <ButtonLink href="/player/matches/create" tone="orange">开排位房</ButtonLink>
       </div>

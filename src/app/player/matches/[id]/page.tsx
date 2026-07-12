@@ -3,7 +3,7 @@ import { ExternalLink, Radio, ShieldCheck } from "lucide-react";
 import { AppShell, ModeMark } from "@/components/AppShell";
 import { MatchRoomActions } from "@/components/MatchRoomActions";
 import { Avatar, ButtonLink, Panel, Pill, StatusBadge } from "@/components/ui";
-import { getCurrentUser } from "@/lib/auth";
+import { requirePageUser } from "@/lib/auth";
 import { getMatch } from "@/lib/data";
 import { EVENT_LABEL, formatLocation, formatMoney, formatTime, MATCH_TYPE_LABEL } from "@/lib/domain";
 
@@ -12,7 +12,7 @@ export default async function MatchDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const [{ id }, user] = await Promise.all([params, getCurrentUser()]);
+  const [{ id }, user] = await Promise.all([params, requirePageUser()]);
   const match = await getMatch(id);
   if (!match) notFound();
 

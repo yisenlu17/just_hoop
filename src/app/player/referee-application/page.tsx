@@ -1,14 +1,12 @@
-import { redirect } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { RefereeApplicationForm } from "@/components/RefereeApplicationForm";
 import { Panel, Pill } from "@/components/ui";
-import { getAuthenticatedUser } from "@/lib/auth";
+import { requirePageUser } from "@/lib/auth";
 import { adminDate, REFEREE_APPLICATION_STATUS_LABEL } from "@/lib/admin-domain";
 import { prisma } from "@/lib/prisma";
 
 export default async function RefereeApplicationPage() {
-  const user = await getAuthenticatedUser();
-  if (!user) redirect("/login");
+  const user = await requirePageUser();
   const latest = await prisma.refereeApplication.findFirst({
     where: { userId: user.id },
     orderBy: { createdAt: "desc" },

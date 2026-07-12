@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Gauge, ListChecks, Trophy, UserRound } from "lucide-react";
+import { Gauge, HeartHandshake, ListChecks, Trophy, UserRound } from "lucide-react";
+import { BackButton } from "@/components/BackButton";
 import { CourtBackdrop, Avatar, ButtonLink, Pill } from "@/components/ui";
 import { MATCH_TYPE_LABEL, ROLE_LABEL } from "@/lib/domain";
 
@@ -8,12 +9,15 @@ type ShellUser = {
   handle: string;
   avatar: string;
   role: string;
+  isReferee?: boolean;
+  isAdmin?: boolean;
   ratings?: Array<{ mode: string; rating: number }>;
 };
 
 const navItems = [
   { href: "/", label: "大厅", icon: Gauge },
   { href: "/player/matches", label: "比赛", icon: ListChecks },
+  { href: "/player/friends", label: "好友", icon: HeartHandshake },
   { href: "/player/rankings", label: "排行", icon: Trophy },
   { href: "/player/profile", label: "球员卡", icon: UserRound },
 ];
@@ -22,18 +26,24 @@ export function AppShell({
   user,
   children,
   active = "大厅",
+  showBack = true,
 }: {
   user: ShellUser | null;
   children: React.ReactNode;
   active?: string;
+  showBack?: boolean;
 }) {
   const oneVsOne = user?.ratings?.find((rating) => rating.mode === "ONE_V_ONE");
+  const canReferee = Boolean(user?.isReferee || user?.isAdmin);
+  const refereeHref = canReferee ? "/referee" : "/player/referee-application";
+  const refereeLabel = canReferee ? "裁判入口" : "申请裁判";
 
   return (
     <div className="min-h-screen text-slate-100">
       <CourtBackdrop />
       <header className="sticky top-0 z-30 border-b border-white/10 bg-[#05070d]/78 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
+          {showBack ? <BackButton /> : null}
           <Link href="/" className="flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-lg border border-orange-300/40 bg-orange-500 text-lg font-black text-black shadow-[0_0_24px_rgba(249,115,22,0.35)]">
               JH
@@ -66,8 +76,8 @@ export function AppShell({
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
-            <ButtonLink href="/referee" tone="dark" className="hidden min-h-9 px-3 py-1.5 text-xs sm:inline-flex">
-              裁判入口
+            <ButtonLink href={refereeHref} tone="dark" className="hidden min-h-9 px-3 py-1.5 text-xs sm:inline-flex">
+              {refereeLabel}
             </ButtonLink>
             <Link
               href="/login"
@@ -87,7 +97,7 @@ export function AppShell({
 
       <main className="mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 sm:py-8">{children}</main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-white/10 bg-[#05070d]/90 px-2 py-2 backdrop-blur-xl md:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-white/10 bg-[#05070d]/90 px-2 py-2 backdrop-blur-xl md:hidden">
         {navItems.map((item) => {
           const Icon = item.icon;
           const selected = active === item.label;
@@ -107,8 +117,8 @@ export function AppShell({
       </nav>
 
       <div className="fixed bottom-20 right-3 z-30 sm:hidden">
-        <Link href="/referee">
-          <Pill tone="blue">裁判入口</Pill>
+        <Link href={refereeHref}>
+          <Pill tone="blue">{refereeLabel}</Pill>
         </Link>
       </div>
     </div>

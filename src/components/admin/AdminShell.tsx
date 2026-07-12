@@ -15,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { BackButton } from "@/components/BackButton";
 import { cn } from "@/components/ui";
 
 const navigation = [
@@ -141,6 +142,7 @@ export function AdminShell({
           >
             <Menu className="h-5 w-5" />
           </button>
+          <BackButton fallback="/admin" />
           <div className="flex items-center gap-2 text-xs font-bold text-slate-500">
             <ShieldCheck className="h-4 w-4 text-emerald-400" />
             管理员权限已验证

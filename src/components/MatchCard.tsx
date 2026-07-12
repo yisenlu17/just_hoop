@@ -72,7 +72,7 @@ export function MatchCard({ match, compact = false }: { match: MatchWithRelation
           <span>{formatMoney(match.buyInCents)}</span>
           {match.timeSlot ? <span>{TIME_SLOT_LABEL[match.timeSlot] ?? match.timeSlot}</span> : null}
           {match.skillLevel ? <span>{SKILL_LEVEL_LABEL[match.skillLevel] ?? match.skillLevel}</span> : null}
-          {match.ratingMin && match.ratingMax ? <span>{match.ratingMin}-{match.ratingMax}</span> : null}
+          {match.mode === "RANKED" ? <span>同段或相邻段位</span> : null}
           <span>{match.mode === "RANKED" ? (match.referee ? `裁判 ${match.referee.name}` : "待远程裁判") : "无需裁判"}</span>
         </div>
         <ButtonLink href={`/player/matches/${match.id}`} tone="ghost" className="min-h-10 px-3 py-2 text-xs">

@@ -34,12 +34,18 @@ export const STATUS_META: Record<
   CANCELLED: { label: "已取消", tone: "gray" },
 };
 
-export const TIME_SLOT_LABEL: Record<string, string> = {
-  MORNING: "上午",
-  AFTERNOON: "下午",
-  EVENING: "晚间",
-  NIGHT: "夜场",
-};
+export const TIME_SLOT_META = {
+  MORNING: { label: "上午", range: "06:00–11:59", defaultTime: "09:00" },
+  AFTERNOON: { label: "下午", range: "12:00–17:59", defaultTime: "14:00" },
+  EVENING: { label: "晚间", range: "18:00–21:59", defaultTime: "19:30" },
+  NIGHT: { label: "夜场", range: "22:00–次日 01:59", defaultTime: "22:30" },
+} as const;
+
+export type TimeSlotKey = keyof typeof TIME_SLOT_META;
+
+export const TIME_SLOT_LABEL: Record<string, string> = Object.fromEntries(
+  Object.entries(TIME_SLOT_META).map(([key, value]) => [key, value.label]),
+);
 
 export const SKILL_LEVEL_LABEL: Record<string, string> = {
   BEGINNER: "新手友好",
@@ -82,6 +88,7 @@ export function formatTime(value?: string | Date | null) {
   if (!value) return "待定";
   const date = typeof value === "string" ? new Date(value) : value;
   return new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -100,22 +107,156 @@ export function formatLocation(match: {
 }
 
 export function scheduledAtFrom(date: string, timeSlot: string) {
-  const hourBySlot: Record<string, string> = {
-    MORNING: "09:00:00",
-    AFTERNOON: "14:00:00",
-    EVENING: "19:00:00",
-    NIGHT: "21:00:00",
-  };
-  return new Date(`${date}T${hourBySlot[timeSlot] ?? "19:00:00"}`);
+  const slot = TIME_SLOT_META[timeSlot as TimeSlotKey] ?? TIME_SLOT_META.EVENING;
+  return new Date(`${date}T${slot.defaultTime}:00+08:00`);
 }
 
-export function rankTitleFromRating(rating: number) {
-  if (rating >= 1500) return "钻石";
-  if (rating >= 1300) return "铂金";
-  if (rating >= 1150) return "黄金";
-  if (rating >= 1000) return "白银";
-  return "青铜";
+export function shanghaiDayRange(date: string) {
+  const start = new Date(`${date}T00:00:00+08:00`);
+  const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+  return { start, end };
 }
+
+export function parseShanghaiLocalDateTime(value: string) {
+  return new Date(`${value}:00+08:00`);
+}
+
+export function timeSlotFromDate(value: Date): TimeSlotKey | null {
+  const hour = Number(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Shanghai",
+      hour: "2-digit",
+      hourCycle: "h23",
+    }).format(value),
+  );
+  if (hour >= 6 && hour < 12) return "MORNING";
+  if (hour >= 12 && hour < 18) return "AFTERNOON";
+  if (hour >= 18 && hour < 22) return "EVENING";
+  if (hour >= 22 || hour < 2) return "NIGHT";
+  return null;
+}
+
+export type RankTierKey =
+  | "BRONZE"
+  | "SILVER"
+  | "GOLD"
+  | "PLATINUM"
+  | "DIAMOND"
+  | "MASTER"
+  | "KING";
+
+type RankTierDef = { key: RankTierKey; name: string; base: number; divisions: number };
+
+// 每个小段跨 50 分、每大段 4 个小段（共 200 分），大段之间连续衔接。
+// 初始分 1000 = 白银 IV；铂金起点 1400 与 K 系数高分档阈值对齐（见 lib/rating.ts）。
+const RANK_STEP = 50;
+
+export const RANK_TIERS: RankTierDef[] = [
+  { key: "BRONZE", name: "青铜", base: 800, divisions: 4 },
+  { key: "SILVER", name: "白银", base: 1000, divisions: 4 },
+  { key: "GOLD", name: "黄金", base: 1200, divisions: 4 },
+  { key: "PLATINUM", name: "铂金", base: 1400, divisions: 4 },
+  { key: "DIAMOND", name: "钻石", base: 1600, divisions: 4 },
+  { key: "MASTER", name: "大师", base: 1800, divisions: 4 },
+  { key: "KING", name: "王者", base: 2000, divisions: 1 },
+];
+
+export const RANK_TIER_ORDER = RANK_TIERS.map((tier) => tier.key);
+
+const ROMAN = ["", "I", "II", "III", "IV", "V"];
+
+export type RankDivision = {
+  key: RankTierKey;
+  tier: string;
+  division: number | null;
+  label: string;
+  floor: number;
+  ceil: number; // 上界（不含），顶段为 Infinity
+};
+
+// 从低到高的完整天梯（每个小段一档）。
+export const RANK_LADDER: RankDivision[] = RANK_TIERS.flatMap((tier) => {
+  if (tier.divisions <= 1) {
+    return [
+      {
+        key: tier.key,
+        tier: tier.name,
+        division: null,
+        label: tier.name,
+        floor: tier.base,
+        ceil: Number.POSITIVE_INFINITY,
+      },
+    ];
+  }
+  // 小段从低到高：III 在最低（tier.base），I 在最高。
+  const rungs: RankDivision[] = [];
+  for (let d = tier.divisions; d >= 1; d -= 1) {
+    const floor = tier.base + (tier.divisions - d) * RANK_STEP;
+    rungs.push({
+      key: tier.key,
+      tier: tier.name,
+      division: d,
+      label: `${tier.name} ${ROMAN[d]}`,
+      floor,
+      ceil: floor + RANK_STEP,
+    });
+  }
+  return rungs;
+});
+
+export function rankFromRating(rating: number): RankDivision {
+  let current = RANK_LADDER[0];
+  for (const rung of RANK_LADDER) {
+    if (rating >= rung.floor) current = rung;
+    else break;
+  }
+  return current;
+}
+
+export function rankTitleFromRating(rating: number): string {
+  return rankFromRating(rating).label;
+}
+
+// 当前小段内的进度，用于展示升段进度条。
+export function rankProgress(rating: number) {
+  const current = rankFromRating(rating);
+  const index = RANK_LADDER.indexOf(current);
+  const next = RANK_LADDER[index + 1] ?? null;
+  const floor = current.floor;
+  const ceil = next ? next.floor : current.floor;
+  const span = ceil - floor;
+  const pct = next ? Math.max(0, Math.min(100, Math.round(((rating - floor) / span) * 100))) : 100;
+  const toNext = next ? Math.max(0, ceil - rating) : 0;
+  return { current, next, floor, ceil, pct, toNext };
+}
+
+// 从段位称号文本反推大段（用于展示历史/非评分场景的着色）。
+export function rankKeyFromTitle(title?: string | null): RankTierKey | null {
+  if (!title) return null;
+  return RANK_TIERS.find((tier) => title.startsWith(tier.name))?.key ?? null;
+}
+
+// 段位大段配色（徽章）。
+export const RANK_TONE: Record<RankTierKey, string> = {
+  BRONZE: "border-amber-700/55 bg-amber-800/25 text-amber-200",
+  SILVER: "border-slate-300/45 bg-slate-300/12 text-slate-100",
+  GOLD: "border-yellow-300/50 bg-yellow-300/14 text-yellow-100",
+  PLATINUM: "border-teal-300/50 bg-teal-300/14 text-teal-100",
+  DIAMOND: "border-sky-300/55 bg-sky-300/16 text-sky-100",
+  MASTER: "border-fuchsia-300/55 bg-fuchsia-400/16 text-fuchsia-100",
+  KING: "border-orange-300/60 bg-gradient-to-r from-red-500/25 to-orange-400/25 text-orange-50",
+};
+
+// 进度条填充色。
+export const RANK_BAR: Record<RankTierKey, string> = {
+  BRONZE: "bg-amber-500",
+  SILVER: "bg-slate-300",
+  GOLD: "bg-yellow-300",
+  PLATINUM: "bg-teal-300",
+  DIAMOND: "bg-sky-400",
+  MASTER: "bg-fuchsia-400",
+  KING: "bg-gradient-to-r from-red-400 to-orange-300",
+};
 
 export function toneClasses(tone: string) {
   const map: Record<string, string> = {

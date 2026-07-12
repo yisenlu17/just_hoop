@@ -406,6 +406,40 @@ export type EnumRefereeApplicationStatusWithAggregatesFilter<$PrismaModel = neve
   _max?: Prisma.NestedEnumRefereeApplicationStatusFilter<$PrismaModel>
 }
 
+export type EnumFriendshipStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FriendshipStatus | Prisma.EnumFriendshipStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFriendshipStatusFilter<$PrismaModel> | $Enums.FriendshipStatus
+}
+
+export type EnumFriendshipStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FriendshipStatus | Prisma.EnumFriendshipStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFriendshipStatusWithAggregatesFilter<$PrismaModel> | $Enums.FriendshipStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFriendshipStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFriendshipStatusFilter<$PrismaModel>
+}
+
+export type EnumPartyInviteStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartyInviteStatus | Prisma.EnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartyInviteStatusFilter<$PrismaModel> | $Enums.PartyInviteStatus
+}
+
+export type EnumPartyInviteStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartyInviteStatus | Prisma.EnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartyInviteStatusWithAggregatesFilter<$PrismaModel> | $Enums.PartyInviteStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPartyInviteStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPartyInviteStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -782,6 +816,40 @@ export type NestedEnumRefereeApplicationStatusWithAggregatesFilter<$PrismaModel 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumRefereeApplicationStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumRefereeApplicationStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumFriendshipStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FriendshipStatus | Prisma.EnumFriendshipStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFriendshipStatusFilter<$PrismaModel> | $Enums.FriendshipStatus
+}
+
+export type NestedEnumFriendshipStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FriendshipStatus | Prisma.EnumFriendshipStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FriendshipStatus[] | Prisma.ListEnumFriendshipStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFriendshipStatusWithAggregatesFilter<$PrismaModel> | $Enums.FriendshipStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFriendshipStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFriendshipStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumPartyInviteStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartyInviteStatus | Prisma.EnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartyInviteStatusFilter<$PrismaModel> | $Enums.PartyInviteStatus
+}
+
+export type NestedEnumPartyInviteStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartyInviteStatus | Prisma.EnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartyInviteStatus[] | Prisma.ListEnumPartyInviteStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartyInviteStatusWithAggregatesFilter<$PrismaModel> | $Enums.PartyInviteStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPartyInviteStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPartyInviteStatusFilter<$PrismaModel>
 }
 
 

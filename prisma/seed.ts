@@ -24,6 +24,10 @@ const minutesFromNow = (minutes: number) =>
   new Date(Date.now() + minutes * 60 * 1000);
 
 async function main() {
+  await prisma.partyInvite.deleteMany();
+  await prisma.partyMember.deleteMany();
+  await prisma.party.deleteMany();
+  await prisma.friendship.deleteMany();
   await prisma.adminLog.deleteMany();
   await prisma.refereeApplication.deleteMany();
   await prisma.violationRecord.deleteMany();
@@ -50,7 +54,7 @@ async function main() {
       dominantHand: "右手",
       playStyle: "持球突破、急停中投",
       creditScore: 96,
-      rankTitle: "黄金 II",
+      rankTitle: "黄金 IV",
       favoriteCourt: "五棵松夜场",
     },
   });
@@ -69,7 +73,7 @@ async function main() {
       dominantHand: "左手",
       playStyle: "快速推进、组织串联",
       creditScore: 100,
-      rankTitle: "白银 I",
+      rankTitle: "白银 III",
       favoriteCourt: "朝阳公园北场",
     },
   });
@@ -88,7 +92,7 @@ async function main() {
       dominantHand: "右手",
       playStyle: "强侧单打、转换终结",
       creditScore: 91,
-      rankTitle: "铂金 IV",
+      rankTitle: "黄金 I",
       favoriteCourt: "东单",
     },
   });
@@ -107,7 +111,7 @@ async function main() {
       dominantHand: "右手",
       playStyle: "挡拆顺下、篮板保护",
       creditScore: 98,
-      rankTitle: "黄金 I",
+      rankTitle: "黄金 II",
       favoriteCourt: "静安体育中心",
     },
   });
@@ -162,6 +166,16 @@ async function main() {
       rankTitle: "平台运营",
       favoriteCourt: "JustHoop HQ",
     },
+  });
+
+  // 好友关系：一森与小宇、阿豪互为好友；陈队向一森发出申请待处理。
+  await prisma.friendship.createMany({
+    data: [
+      { requesterId: yisen.id, addresseeId: xiaoyu.id, status: "ACCEPTED", respondedAt: minutesFromNow(-60 * 24) },
+      { requesterId: hao.id, addresseeId: yisen.id, status: "ACCEPTED", respondedAt: minutesFromNow(-60 * 48) },
+      { requesterId: xiaoyu.id, addresseeId: hao.id, status: "ACCEPTED", respondedAt: minutesFromNow(-60 * 12) },
+      { requesterId: chen.id, addresseeId: yisen.id, status: "PENDING" },
+    ],
   });
 
   await prisma.playerRating.createMany({

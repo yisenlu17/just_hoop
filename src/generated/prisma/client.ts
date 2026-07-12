@@ -87,6 +87,26 @@ export type RefereeApplication = Prisma.RefereeApplicationModel
  */
 export type AdminLog = Prisma.AdminLogModel
 /**
+ * Model Friendship
+ * 
+ */
+export type Friendship = Prisma.FriendshipModel
+/**
+ * Model Party
+ * 
+ */
+export type Party = Prisma.PartyModel
+/**
+ * Model PartyMember
+ * 
+ */
+export type PartyMember = Prisma.PartyMemberModel
+/**
+ * Model PartyInvite
+ * 
+ */
+export type PartyInvite = Prisma.PartyInviteModel
+/**
  * Model ViolationRecord
  * 
  */

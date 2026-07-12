@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { CalendarClock, MapPin, Trophy, UsersRound } from "lucide-react";
 import { Button } from "@/components/ui";
+import { TIME_SLOT_META } from "@/lib/domain";
 
 type FormState = {
   title: string;
@@ -31,6 +32,10 @@ export function CreateMatchForm() {
   }
 
   function submit() {
+    if (!form.scheduledAt) {
+      alert("请先选择具体开赛时间");
+      return;
+    }
     startTransition(async () => {
       const response = await fetch("/api/matches", {
         method: "POST",
@@ -109,11 +114,15 @@ export function CreateMatchForm() {
         <span className="relative">
           <CalendarClock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cyan-300" />
           <input
-            type="datetime-local"
+          type="datetime-local"
+          required
             value={form.scheduledAt}
             onChange={(event) => update("scheduledAt", event.target.value)}
             className="h-12 w-full rounded-lg border border-white/10 bg-black/30 pl-9 pr-3 text-base font-bold text-white outline-none focus:border-orange-300/60"
           />
+        </span>
+        <span className="text-xs font-bold leading-5 text-slate-500">
+          {Object.values(TIME_SLOT_META).map((slot) => `${slot.label} ${slot.range}`).join(" · ")}
         </span>
       </label>
       <label className="grid gap-2 text-sm font-black text-slate-300">
